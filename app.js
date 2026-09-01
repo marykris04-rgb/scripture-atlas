@@ -2,7 +2,7 @@
 const tabs=[
   ['home','Overview','⌂'],['characters','Characters','♙'],['events','Events','◇'],
   ['tree','Family Trees','⌘'],['timeline','Timeline','↝'],['bible','Bible','▤'],
-  ['concordance','Concordance','⌕'],['quiz','Quiz','?'],['stats','Statistics','▥']
+  ['concordance','Concordance','⌕'],['devotion','Daily Devotion','☀'],['notes','My Notes','✎'],['prayers','Prayer Journal','♡'],['quiz','Quiz','?'],['stats','Statistics','▥']
 ];
 function home(){
   const readDays=ReadingStreak.days().length,current=ReadingStreak.current(),longest=ReadingStreak.longest();
@@ -48,7 +48,7 @@ function render(){
   const nav=document.getElementById('nav'),app=document.getElementById('app');
   nav.innerHTML=tabs.map(t=>`<button type="button" data-tab="${t[0]}" aria-current="${State.tab===t[0]?'page':'false'}" class="${State.tab===t[0]?'active':''}"><span class="nav-icon" aria-hidden="true">${t[2]}</span><span>${t[1]}</span></button>`).join('');
   nav.querySelectorAll('[data-tab]').forEach(b=>b.onclick=()=>{State.tab=b.dataset.tab;State.query='';closeDrawer(false);render();window.scrollTo({top:0,behavior:'smooth'});app.focus({preventScroll:true})});
-  const pages={home,characters:()=>Atlas.list('characters'),events:()=>Atlas.list('events'),tree:()=>Atlas.tree(),timeline:()=>Atlas.timeline(),bible:()=>Bible.view(),concordance:()=>Bible.concordance(),quiz:()=>Quiz.view(),stats};
+  const pages={home,characters:()=>Atlas.list('characters'),events:()=>Atlas.list('events'),tree:()=>Atlas.tree(),timeline:()=>Atlas.timeline(),bible:()=>Bible.view(),concordance:()=>Bible.concordance(),devotion:()=>Devotions.view(),notes:()=>Notes.view(),prayers:()=>PrayerJournal.view(),quiz:()=>Quiz.view(),stats};
   app.innerHTML=pages[State.tab](); document.querySelectorAll('[data-mobile-tab]').forEach(b=>b.classList.toggle('active',b.dataset.mobileTab===State.tab)); bind();
 }
 function bind(){
@@ -64,7 +64,7 @@ function bind(){
   const t=document.getElementById('timelineTest'),c=document.getElementById('timelineCat');
   if(t){t.value=State.timelineTestament;t.onchange=e=>{State.timelineTestament=e.target.value;render()}}
   if(c){c.value=State.timelineCategory;c.onchange=e=>{State.timelineCategory=e.target.value;render()}}
-  if(State.tab==='quiz')Quiz.bind();
+  if(State.tab==='quiz')Quiz.bind();if(State.tab==='devotion')Devotions.bind();if(State.tab==='notes')Notes.bind();if(State.tab==='prayers')PrayerJournal.bind();
   const cq=document.getElementById('concordanceSearch');
   if(cq)cq.oninput=e=>{State.concordanceQuery=e.target.value;render();const n=document.getElementById('concordanceSearch');n?.focus();n?.setSelectionRange(State.concordanceQuery.length,State.concordanceQuery.length)};
 }
@@ -73,6 +73,6 @@ document.getElementById('menuBtn').onclick=openDrawer;
 document.getElementById('drawerCloseBtn').onclick=()=>closeDrawer();
 document.getElementById('drawerBackdrop').onclick=()=>closeDrawer();
 document.getElementById('themeBtn').onclick=()=>{document.body.classList.toggle('dark');store.set('theme',document.body.classList.contains('dark')?'dark':'light')};
-document.getElementById('exportBtn').onclick=()=>{const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify({scores:State.scores,mastery:State.mastery},null,2)],{type:'application/json'}));a.download='scripture-atlas-v5.5-data.json';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),500)};
+document.getElementById('exportBtn').onclick=()=>{const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify({scores:State.scores,mastery:State.mastery,notes:JournalStore.notes(),prayers:JournalStore.prayers()},null,2)],{type:'application/json'}));a.download='scripture-atlas-v5.8-data.json';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),500)};
 window.addEventListener('keydown',e=>{if(e.key==='Escape'&&document.getElementById('drawer').classList.contains('open'))closeDrawer()});
 render();

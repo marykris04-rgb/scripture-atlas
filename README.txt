@@ -47,3 +47,19 @@ V5.5 MOBILE UI UPDATE
 - Added fixed mobile bottom navigation for Home, Characters, Bible, Quiz, and More.
 - Restored and retained the full Overview dashboard with the right-side storybook image.
 - Event Encyclopedia remains text-only.
+
+V5.7 JOURNAL UPDATE
+- Added Daily Devotion with rotating offline reflections and prayers.
+- Added My Notes with local browser storage.
+- Added Prayer Journal with Active, Answered, and Archived statuses.
+- Added Save Devotion to Notes and Save Prayer to Journal actions.
+- Retains mobile bottom navigation, full-image Overview dashboard, character images, and text-only Event Encyclopedia.
+- Removed mobile horizontal scrolling and made filters/cards fit the viewport.
+
+V5.8 MOBILE LAYOUT FIXES
+- Made the side menu independently scrollable through the full mobile viewport.
+- Added bottom safe-area spacing so Statistics and Settings remain reachable.
+- Forced every category page to stay within the phone viewport.
+- Removed horizontal overflow from character cards, events, timelines, family trees, devotion, notes, and prayer journal.
+- Stacked filters, cards, forms, and detail layouts on small screens.
+- Preserved the full-image Overview dashboard and mobile bottom navigation.
