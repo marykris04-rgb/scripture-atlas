@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#76562d">
+  <meta name="color-scheme" content="light dark">
+  <meta name="description" content="Responsive Bible character, event, genealogy, timeline, reference, concordance, and quiz companion.">
+  <title>Scripture Atlas v5.5</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#app">Skip to content</a>
+
+  <header class="app-header">
+    <button id="menuBtn" class="menu-button" type="button" aria-label="Open navigation menu" aria-controls="drawer" aria-expanded="false">
+      <span class="hamburger" aria-hidden="true"><i></i><i></i><i></i></span>
+    </button>
+    <div class="brand-block">
+      <small>Bible learning companion</small>
+      <h1>Scripture Atlas <span>v5.5</span></h1>
+    </div>
+  </header>
+
+  <div id="drawerBackdrop" class="drawer-backdrop hidden" aria-hidden="true"></div>
+  <aside id="drawer" class="drawer" aria-label="Navigation and settings" aria-hidden="true">
+    <div class="drawer-header">
+      <div>
+        <small>Scripture Atlas</small>
+        <h2>Menu</h2>
+      </div>
+      <button id="drawerCloseBtn" class="square-button" type="button" aria-label="Close navigation menu">×</button>
+    </div>
+
+    <div class="drawer-scroll">
+      <nav id="nav" class="drawer-nav" aria-label="Primary navigation"></nav>
+
+      <section class="settings-panel" aria-labelledby="settingsTitle">
+        <h3 id="settingsTitle">Settings</h3>
+        <button id="themeBtn" class="setting-button" type="button">
+          <span aria-hidden="true">◐</span>
+          <span><b>Theme</b><small>Switch light or dark mode</small></span>
+        </button>
+        <button id="exportBtn" class="setting-button" type="button">
+          <span aria-hidden="true">⇩</span>
+          <span><b>Export</b><small>Download quiz progress</small></span>
+        </button>
+      </section>
+    </div>
+  </aside>
+
+  <main id="app" tabindex="-1"></main>
+
+  <div id="modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="modalTitle" aria-hidden="true">
+    <section class="modal-panel">
+      <header class="modal-header">
+        <h2 id="modalTitle">Details</h2>
+        <button class="close square-button" type="button" onclick="UI.close()" aria-label="Close dialog">×</button>
+      </header>
+      <div id="modalBody" class="modal-body" tabindex="0"></div>
+    </section>
+  </div>
+
+  <script src="data.js"></script>
+  <script src="core.js"></script>
+  <script src="reference-cache.js"></script>
+  <script src="tabs-characters.js"></script>
+  <script src="tabs-bible.js"></script>
+  <script src="tabs-quiz.js"></script>
+  <script src="app.js"></script>
+
+  <nav id="mobileBottomNav" class="mobile-bottom-nav" aria-label="Mobile navigation">
+    <button type="button" data-mobile-tab="home"><span>⌂</span><small>Home</small></button>
+    <button type="button" data-mobile-tab="characters"><span>♙</span><small>Characters</small></button>
+    <button type="button" data-mobile-tab="bible"><span>▤</span><small>Bible</small></button>
+    <button type="button" data-mobile-tab="quiz"><span>?</span><small>Quiz</small></button>
+    <button type="button" data-mobile-menu="true"><span>☰</span><small>More</small></button>
+  </nav>
+</body>
+</html>
